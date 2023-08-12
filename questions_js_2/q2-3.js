@@ -20,14 +20,23 @@ const drinks =
     }
 ];
 
-//console.log(drinks[0].price);
+const vendingMachine = (money, item) => {
+    drinks.find((value)=>{
+        if (value.name === item && money >= value.price) {
+            console.log(value.name+'を買いました。おつりは'+(money-value.price)+'円です');
+        } else if (value.name === item){ 
+            console.log('お金が足りません');
+        };
+    });
 
-const vendingMachine = (money, i) => {
-    if (money > drinks[i].price){
-        console.log(drinks[i].name+'を買いました。おつりは'+(money-drinks[i].price)+'円です');
-    } else {
-        console.log('お金が足りません');
-    }
-}
+};
 
-vendingMachine(20, 1);
+vendingMachine(1000, '緑茶');
+
+
+
+
+        // } else if (value.name === item && money < value.price) {
+        //     console.log('お金が足りません');
+        // } else {
+        //     console.log('該当なし');
