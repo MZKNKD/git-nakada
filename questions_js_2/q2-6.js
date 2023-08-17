@@ -18,8 +18,25 @@ const drinks =
     }
 ];
 
-var drinksOfForm = document.getElementsByName("drink");
+// var drinksOfForm = document.getElementsByName("drink");
 
-drinksOfForm.forEach(element => {
-    console.log(element);
+// drinksOfForm.forEach(element => {
+//     console.log(element);
+// });
+
+const target = document.getElementById('target');
+
+drinks.forEach((element)=>{
+    const inputRadioButton = document.createElement("input");
+    inputRadioButton.type = "radio";
+    inputRadioButton.name = "radioButton";
+    inputRadioButton.id = "radio_button";
+
+    const drinkLabel = document.createElement("label");
+    // drinkLabel.htmlFor = "radio";
+    text = document.createTextNode(element.name);
+    target.appendChild(drinkLabel);
+    drinkLabel.appendChild(inputRadioButton);
+    drinkLabel.appendChild(text);
 });
+
