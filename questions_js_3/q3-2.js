@@ -51,36 +51,46 @@ const buttonForm = document.getElementById("button_form");
 //クリックしたら計算する
 buttonForm.addEventListener('click', () => {
 
-    var numberForm = document.getElementById("money_in").value;
+    let numberForm = document.getElementById("money_in").value;
 
-    var drinkForm = document.getElementsByName("radioButton");
+    const drinkForm = document.getElementsByName("radioButton");
 
-    var drinkFormArray = Array.from(drinkForm);
+    const drinkFormArray = Array.from(drinkForm);
 
-    var radio = "";
+    //計算結果表示場所
+    const show = document.getElementById("show");
+
+    //バリデーションメッセージ表示場所
+    const showMessage = document.getElementById("show_message");
+
+    let radio = "";
+    const errorMessage = "飲み物を選んでください";
 
         for (let i = 0; i < drinkFormArray.length; i++){
-            if (drinkFormArray[i].checked == true){
+            if (drinkFormArray[i].checked){
                 radio = drinkFormArray[i].value;
+                showMessage.classList.add('remove');
 
                     //console.log(numberForm);
                     console.log(radio);
-                    
-                    const vendingMachine = (money, radio) => {
-                        drinks.find((value)=>{
-                            if (value.name === radio && money >= value.price) {
-                                show.textContent = value.name+'を買いました。おつりは'+(money-value.price)+'円です';
-                            } else if (value.name === radio){ 
-                                show.textContent ='お金が足りません';
-                            };
-                        });
-                    };
 
-                    vendingMachine(numberForm, radio);
-            } else if (drinkFormArray[i].value === false) {
-                console.log("エラー")
-            }
-    
-        } 
+        const vendingMachine = (money, radio) => {
+            drinks.find((value)=>{
+                if (value.name === radio && money >= value.price) {
+                    show.textContent = value.name+'を買いました。おつりは'+(money-value.price)+'円です';
+                } else if (value.name === radio){ 
+                    show.textContent ='お金が足りません';
+                };
+            });
+        };
 
+        vendingMachine(numberForm, radio);
+
+        
+        } else if (drinkFormArray[i].checked.length == 0) {
+            return errorMessage;
+        }
+        showMessage.textContent = errorMessage;
+        showMessage.classList.add('red');
+    }
 })
