@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="target"></div>
+    <script type="text/babel">
+
+        const container = document.getElementById('target')
+        const root = ReactDOM.createRoot(container)
+
+        // const element = <h1 className="red">テスト</h1>
+
+        const VendingMachine = () => {
+
+            const drinks = 
+                [
+                    {
+                    name: 'コーラ',
+                    price: 150
+                    },
+                    {
+                    name: '緑茶',
+                    price: 120
+                    },
+                    {
+                    name: '水',
+                    price: 80
+                    },
+                    {
+                    name: 'コーヒー',
+                    price: 180    
+                    }
+                ];
+            
+            {//q2-3.jsの関数をコピペしました
+            }
+            const vendingMachineFunc = (money, item) => {
+                drinks.find((value)=>{
+                    if (value.name === item && money >= value.price) {
+                        console.log(value.name+'を買いました。おつりは'+(money-value.price)+'円です');
+                    } else if (value.name === item){ 
+                        console.log('お金が足りません');
+                    };
+                });
+
+            };
+
+            vendingMachineFunc(500, 'コーラ');
+
+            return(
+                <>
+                </>
+            )
+        }
+
+        root.render(<><VendingMachine /></>);
+
+
+    </script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</body>
+</html>
