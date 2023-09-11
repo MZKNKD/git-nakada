@@ -30,34 +30,37 @@
         const container = document.getElementById('target')
         const root = ReactDOM.createRoot(container)
 
+        const test = () => {
+            console.log("Q4テスト")
+        }
+
         // const element = <h1 className="red">テスト</h1>
 
-        const VendingMachine = () => {
+        // const drinks = 
+        //         [
+        //             {
+        //             name: 'coke',
+        //             name_ja: 'コーラ',
+        //             price: 150
+        //             },
+        //             {
+        //             name: 'tea',
+        //             name_ja: '緑茶',
+        //             price: 120
+        //             },
+        //             {
+        //             name: 'water',
+        //             name_ja: '水',
+        //             price: 80
+        //             },
+        //             {
+        //             name: 'coffee',
+        //             name_ja: 'コーヒー',
+        //             price: 180    
+        //             }
+        //         ];
 
-            const drinks = 
-                [
-                    {
-                    name: 'coke',
-                    name_ja: 'コーラ',
-                    price: 150
-                    },
-                    {
-                    name: 'tea',
-                    name_ja: '緑茶',
-                    price: 120
-                    },
-                    {
-                    name: 'water',
-                    name_ja: '水',
-                    price: 80
-                    },
-                    {
-                    name: 'coffee',
-                    name_ja: 'コーヒー',
-                    price: 180    
-                    }
-                ];
-        
+        const VendingMachine = () => {
 
             const useState = React.useState
             const [form, setForm] = useState({
@@ -76,29 +79,30 @@
             const handleSubmit = e => {
                 e.preventDefault()
                 
-                const show = document.getElementById("text_show")
-
-                // console.log(numberForm);
-                // console.log(radio);
-
-                const vendingMachineFunc = (money, item) => {
-                    drinks.find((value)=>{
-                        if (value.name === item && money >= value.price) {
-                            show.textContent = value.name_ja+'を買いました。おつりは'+(money-value.price)+'円です';
-                        } else if (value.name === item){ 
-                            show.textContent ='お金が足りません';
-                        };
-                    });
-                };
-
-                console.log("hello")
-                console.log(e)
+                test()
+                // console.log("hello")
+                // console.log(e)
                 
-                console.log(form.item)
-                console.log(form.money)
-                console.log(vendingMachineFunc(form.money, form.item));
+                // console.log(form.item)
+                // console.log(form.money)
+                //console.log(vendingMachineFunc(form.money, form.item))
 
-                
+
+                // const show = document.getElementById("text_show")
+
+                // // console.log(numberForm);
+                // // console.log(radio);
+
+                // const vendingMachineFunc = (money, item) => {
+                //     drinks.find((value)=>{
+                //         if (value.name === item && money >= value.price) {
+                //             show.textContent = value.name_ja+'を買いました。おつりは'+(money-value.price)+'円です';
+                //         } else if (value.name === item){ 
+                //             show.textContent ='お金が足りません';
+                //         };
+                //     });
+                // };
+                // vendingMachineFunc(form.money, form.item)
             }
 
             return(
