@@ -30,11 +30,7 @@
         const container = document.getElementById('target')
         const root = ReactDOM.createRoot(container)
 
-        // const element = <h1 className="red">テスト</h1>
-
-        const VendingMachine = () => {
-
-            const drinks = 
+        const drinks = 
                 [
                     {
                     name: 'coke',
@@ -62,6 +58,20 @@
                     }
                 ];
 
+                const show = document.getElementById("text_show")
+
+                const vendingMachineFunc = (money, item) => {
+                    drinks.find((value)=>{
+                        if (value.name === item && money >= value.price) {
+                            show.textContent = value.name_ja+'を買いました。おつりは'+(money-value.price)+'円です';
+                        } else if (value.name === item){ 
+                            show.textContent ='お金が足りません';
+                        };
+                    });
+                };
+
+        const VendingMachine = () => {
+
             const useState = React.useState
             const [form, setForm] = useState({
                 money: '',
@@ -79,31 +89,13 @@
             const handleSubmit = e => {
                 e.preventDefault()
 
-
-                
-                const show = document.getElementById("text_show")
-
-                // console.log(numberForm);
-                // console.log(radio);
-
-                const vendingMachineFunc = (money, item) => {
-                    drinks.find((value)=>{
-                        if (value.name === item && money >= value.price) {
-                            show.textContent = value.name_ja+'を買いました。おつりは'+(money-value.price)+'円です';
-                        } else if (value.name === item){ 
-                            show.textContent ='お金が足りません';
-                        };
-                    });
-                };
-
-                console.log("hello")
-                console.log(form)
-                
+                console.log(form)                
                 console.log(form.item)
                 console.log(form.money)
-                console.log(vendingMachineFunc(form.money, form.item));
 
-                
+ 
+
+                vendingMachineFunc(form.money, form.item)
             }
 
             return(
