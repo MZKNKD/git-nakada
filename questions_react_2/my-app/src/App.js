@@ -8,6 +8,7 @@ import React, {useState} from 'react'
 function App() {
   return (
     <div className="App">
+      <GetAddress/>
       <FormComponent />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -27,20 +28,74 @@ function App() {
   );
 }
 
-const url = "https://zipcloud.ibsnet.co.jp/api/search?zipcode="
+const zipcloudURL = "https://zipcloud.ibsnet.co.jp/api/search?zipcode="
 
-const GetAddress = () => {
-  const pcode = PostalCode()
+const options = {
+  method: 'GET'
+};
+
+export const GetAddress = () => {
   const [postalCode, setPostalCode ] = useState({
     zip: ''
   })
+
+  const handleChange = e =>{
+    const {name, value} = e.target
+    setPostalCode({
+        ...postalCode,
+        [name]: value,
+    })
+  }
+
+  const handleClick = e => {
+    e.preventDefault()
+
+    const errorMessage = document.getElementById("error_message");
+    let addressInput = document.getElementById("address")
+
+    if(postalCode.zip.length === 7){
+      const searchURL = zipcloudURL + postalCode.zip;
+      console.log(searchURL);
+      errorMessage.classList.add('red', 'remove');
+
+      function getPostCode(searchURL, options){
+          return fetch(searchURL, options)
+          .then( response => response.json())
+                  .then( response2 => {
+                      if(response2.results === null){
+                          errorMessage.classList.remove('remove');
+                          errorMessage.textContent = '住所の検索ができませんでした';
+                          addressInput.value = null
+                      };
+
+                      console.log(response2.results[0].address1);
+                      var fullAddress = response2.results[0].address1 + response2.results[0].address2 + response2.results[0].address3;
+                      console.log(fullAddress)
+                      addressInput.value = fullAddress;
+
+                  }).catch(e=>{
+                      console.log("エラー：", e.message);
+              });
+          }
+      
+      async function getCode(searchURL, options){
+          const response = await getPostCode(searchURL, options);
+      }
+
+      getCode(searchURL, options);
+    } else {
+        errorMessage.textContent = "7桁の数字をハイフン無しで入力してください";
+        errorMessage.classList.remove('remove');
+        errorMessage.classList.add('red')
+        addressInput.value = null
+    }
+  }
+
   return(
     <>
-      {pcode}
+      <PostalCode handleClick={handleClick} handleChange={handleChange}/>
     </>
   )
 }
-
-
 
 export default App;
