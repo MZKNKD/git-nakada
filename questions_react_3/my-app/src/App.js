@@ -61,7 +61,13 @@ function App() {
       <Route path="/" element={<Header/>}>
         <Route path="/Home" element={<Home/>}/>
         <Route path="/FormComponent" element={<FormComponent/>}/>
-        <Route path="/PostalCode" element={<PostalCode/>}/>
+        <Route path="/PostalCode" element={<PostalCode
+          postalCode={postalCode}
+          handleChange={handleChange}
+          handleClick={handleClick}
+          errorMessage={errorMessage}
+          address={address}
+        />}/>
       </Route>
     </Routes>
     
