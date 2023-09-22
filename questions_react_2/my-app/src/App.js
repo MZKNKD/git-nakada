@@ -4,11 +4,14 @@ import './App.css';
 import FormComponent from './FormComponent';
 import PostalCode from './PostalCode';
 import React, { useState } from 'react';
+import Header from './pages/Header'
+import {ROutes, Route} from 'react-router-dom'
 
 function App() {
   const [postalCode, setPostalCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [address, setAddress] = useState('');
+
 
   const zipcloudURL = "https://zipcloud.ibsnet.co.jp/api/search?zipcode=";
   const options = {
@@ -50,7 +53,9 @@ function App() {
   };
 
   return (
+    
     <div className="App">
+      <Header/>
       <PostalCode
         postalCode={postalCode}
         handleChange={handleChange}
