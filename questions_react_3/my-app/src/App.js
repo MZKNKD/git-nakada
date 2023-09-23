@@ -7,6 +7,9 @@ import React, { useState } from 'react';
 import Header from './Header';
 import Home from './pages/Home'
 import {Routes, Route} from 'react-router-dom'
+import ContactList from './pages/ContactList';
+import ContactIndex from './pages/ContactIndex';
+import ContactDetail from './pages/ContactDetail';
 
 function App() {
   const [postalCode, setPostalCode] = useState('');
@@ -68,6 +71,10 @@ function App() {
           errorMessage={errorMessage}
           address={address}
         />}/>
+      </Route>
+      <Route path="/contact-list" element={<ContactList/>}>
+        <Route index element={<ContactIndex/>}/>
+        <Route path=":id" element={<ContactDetail/>}/>
       </Route>
     </Routes>
     
